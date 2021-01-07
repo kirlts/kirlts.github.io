@@ -12,18 +12,26 @@ services:
       - title: "Asesorías"
         desc: "Te asesoramos para la compra de hardware y software. Equipos gamer, ofimática, portátiles o teletrabajo, sólo dinos tu presupuesto y objetivos, y te apuntaremos al lugar correcto."
         icon: fas fa-shopping-cart #find more at https://fontawesome.com/icons
+
       - title: "Diagnóstico y resolución"
         desc: "¿Tienes un problema que no sabes cómo resolver? ¿Tu equipo ya no funciona tan rápido como antes? Encontraremos la raíz de tu problema y lo resolveremos."
-        icon: fas fa-tools   
+        icon: fas fa-tools 
+
       - title: "Formateos"
         desc: "Si quieres reinstalar windows y empezar desde cero, este es tu servicio. Borraremos los datos del equipo e instalaremos el sistema operativo original, mejorando el rendimiento de tu equipo."
-        icon: fab fa-markdown
+        icon: fas fa-recycle
+
       - title: "Instalación de software"
         desc: "Realizamos instalación y configuración de software con licencia original y OEM, tanto sistemas operativos (Windows, distros de Linux) como programas (Photoshop, AutoCAD, etc)."
         icon: fas fa-laptop-code
-      - title: "Mantención de equipos"
+
+      - title: "Mantención y limpieza"
         desc: "Si necesitas reducir las temperaturas de tu computador, mejorar el flujo de aire o simplemente realizar una limpieza general, consulta por una mantención física."
-        icon: fas fa-cogs
+        icon: fad fa-pump-soap
+
+      - title: "Respaldos en la Nube"
+        desc: "Te ayudamos a subir todos tus archivos importantes a la nube, para que no los pierdas si le ocurre algo a tu equipo. Consulta por asesorías en uso de Drive para equipos de trabajo."
+        icon: fab fa-google-drive
 
 portfolio:
     title: "Portfolio"
