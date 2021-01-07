@@ -33,17 +33,10 @@ services:
         desc: "Te ayudamos a subir todos tus archivos importantes a la nube, para que no los pierdas si le ocurre algo a tu equipo. Consulta por asesorías en uso de Drive para equipos de trabajo."
         icon: fab fa-google-drive
 
-portfolio:
-    title: "Portfolio"
-    text: "Lorem ipsum dolor sit amet consectetur."
-    section: portfolio
-    closebutton: "Close Project"
-    
-
 timeline:
-    title: "About" 
+    title: "Sobre Nosotros" 
     text: "Lorem ipsum timeline"
-    section: timeline
+    section: nosotros
     # left is the default
     #start_align: "left"
     events:
