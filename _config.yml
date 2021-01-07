@@ -21,8 +21,8 @@ email      : contacto.thefixer@gmail.com #this is also the email contact forms w
 description: "The Fixer ofrece servicio tecnico computacional personalizado en Santiago, Chile."
 author     : The Fixer.
 logo:     #optional, defaults to site title
-path: assets\img\clients\THE FIXER LOGO.png
-height: 60 #height in px, defaults to 52px
+  path: assets\img\clients\thefixerlogo.png
+  height: 60 #height in px, defaults to 52px
 
 analytics:
   google: #Google Analytics tracking code here
