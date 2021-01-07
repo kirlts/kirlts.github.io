@@ -1,0 +1,9 @@
+nav:
+  - title: "Servicios"
+    section: servicios
+ 
+  - title: "Sobre Nosotros"
+    section: nosotros
+
+  - title: "Contacto"
+    section: contacto
