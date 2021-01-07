@@ -10,12 +10,12 @@ services:
     section: servicios
     list:
       - title: "Asesorías"
-        desc: "Te asesoramos para la compra de hardware y software. Equipos gamer, ofimática, portátiles o teletrabajo, tan solo dinos tu presupuesto y tus objetivos, y te apuntaremos al lugar correcto."
+        desc: "Te asesoramos para la compra de hardware y software. Equipos gamer, ofimática, portátiles o teletrabajo, sólo dinos tu presupuesto y objetivos, y te apuntaremos al lugar correcto."
         icon: fas fa-shopping-cart #find more at https://fontawesome.com/icons
       - title: "Diagnóstico y resolución de problemas"
         desc: "¿Tienes un problema que no sabes cómo resolver? ¿Tu equipo ya no funciona tan rápido como antes? Tras un diagnóstico, encontraremos la raíz de tu problema y te indicaremos las alternativas para resolverlo."
         icon: fas fa-tools   
-      - title: "Formateo de equipos"
+      - title: "Formateo de equipos e instalación de sistema operativo"
         desc: "El formateo consiste en reestablecer un dispositivo de almacenamiento a su estado original (de fábrica), borrando todos sus datos. Si te interesa volver tu equipo a como era cuando lo compraste, o si quieres prepararlo para una venta, este es el servicio indicado."
         icon: fab fa-markdown
 
