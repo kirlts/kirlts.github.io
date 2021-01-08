@@ -125,8 +125,8 @@ team:
             icon: fab fa-linkedin-in
           
 contact:
-    title: "Contact Us"
-    text: "Lorem ipsum or call 123456789"
+    title: "Contáctanos"
+    text: "Déjanos tu consulta o solicita una cotización en el formulario de abajo y te responderemos a la brevedad."
     section: contact
     
 footer:
