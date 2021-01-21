@@ -1,5 +1,5 @@
 header:
-    #title: The Fixer
+    title: The Fixer
     text: Servicio técnico computacional en Santiago, Chile.
     button: Cuéntame más
     buttonlink: "#servicios"
@@ -28,46 +28,22 @@ services:
       - title: "Mantención y limpieza"
         desc: "Si necesitas reducir las temperaturas de tu computador, mejorar el flujo de aire o simplemente realizar una limpieza general, consulta por una mantención física."
         icon: fad fa-pump-soap
-
-      - title: "Respaldos en la Nube"
-        desc: "Te ayudamos a subir todos tus archivos importantes a la nube, para que no los pierdas si le ocurre algo a tu equipo. Consulta por asesorías en uso de Drive para equipos de trabajo."
-        icon: fab fa-google-drive
-
-timeline:
-    title: "Sobre Nosotros" 
-    text: "Lorem ipsum timeline"
-    section: nosotros
-    # left is the default
-    #start_align: "left"
-    events:
-      - title: "Our Humble Beginnings"
-        year: "2009-2011"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
-        image: assets/img/timeline/1.jpg
-        alt: 
-      - title: "An Agency is Born"
-        year: "March 2011"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
-        image: assets/img/timeline/2.jpg
-        alt: 
-      - title: "Jekyll Theme is created"
-        year: "2019"
-        desc: "Ravi Riley converted Agency, a Bootstrap-based theme, into a Jekyll theme. The Jekyll theme can be installed as a Ruby gem, or remotely. For more information, visit the documentation."
-        image: assets/img/timeline/3.jpg
-        alt: image alt text
-      - title: "Title"
-        year: "2009-2011"
-        desc: "Your description here, **Markdown** is fully supported."
-        image: assets/img/timeline/4.jpg
-        alt: 
-        # you can enforce the aligment
-        align: right
-    end: "Be Part <br> of Our <br> Story!"
+      
+      - title: "Mantención de hosting"
+        desc: "Te ayudamos con el mantenimiento de tu página web, la renovación de dominio y actualizaciones regulares de contenido."
+        icon: far fa-browser
 
 about:
-    title: "About Us"
-    text: "our story"
-    section: about
+    title: "Sobre nosotros"
+    subtitle: "Atención personalizada, completa y profesional para todos nuestros clientes. Sin excepción."
+    text: "Hoy en día los equipos tecnológicos son parte esencial de nuestra vida personal y profesional. Cada negocio, empresario, estudiante y profesional requiere de herramientas funcionales para desempeñarse al ritmo que la actualidad exige. Depender de equipos que no funcionen de manera óptima es un duro golpe a la productividad.
+    
+
+    Con amplia experiencia en el rubro , The Fixer ofrece servicios de reparación, mantención, formateo, asesorías y más en Santiago, Chile. Otorgamos una atención completa y personalizada, no trabajamos con plantillas de soporte desactualizadas y desconectadas de la tecnología actual.
+    
+    
+    Ya seas un particular que necesite hacer una mantención, mejora o recambio de su PC, o seas una empresa que busque renovar o mantener sus equipos actuales, te ofrecemos la mejor atención que podemos brindar. No contamos con un local físico, por lo que la atención debe realizarse por alguno de los medios señalados en la página."
+    section: nosotros
 
 clients:
     section: clients
@@ -132,16 +108,9 @@ contact:
 footer:
     legal: "Privacy Policy"
     social:
-      - url: https://twitter.com
-        icon: "fab fa-twitter"  
-      - url: https://facebook.com
-        icon: "fab fa-facebook-f"
-      - url: https://linkedin.com
-        icon: "fab fa-linkedin-in"
-      - url: https://github.com/raviriley/agency-jekyll-theme
-        icon: "fab fa-github"
-      - url: https://instagram.com
-        icon: "fab fa-instagram"
-
+      - url: https://web.whatsapp.com/send?phone=56994172921&text=Hola,%20estoy%20interesado%20en%20una%20cotización.
+        icon: "fab fa-whatsapp"
+      - url: mailto:contacto.thefixer@gmail.com
+        icon: "fas fa-envelope"
 
 # {{ site.data.sitetext.ex.ex | markdownify | default: example }}
