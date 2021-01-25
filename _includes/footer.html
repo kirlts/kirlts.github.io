@@ -3,7 +3,8 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-4">
-          <span class="copyright">Copyright &copy; {{ site.title }} {{ 'now' | date: "%Y" }}</span>
+          <div class="section-subheading text-muted">{{ site.data.sitetext.footer.text | markdownify }}</div>
+          <!--<span class="copyright">Copyright &copy; {{ site.title }} {{ 'now' | date: "%Y" }}</span>-->
         </div>
 		<!-- Social Media -->
         <div class="col-md-4">
