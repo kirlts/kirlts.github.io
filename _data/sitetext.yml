@@ -1,8 +1,8 @@
 header:
     title: The Fixer
     text: Servicio técnico computacional en Santiago, Chile.
-    button: Cuéntame más
-    buttonlink: "#servicios"
+    button: Contáctanos
+    buttonlink: "#contact"
 
 services:
     title: "Servicios"
