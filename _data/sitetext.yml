@@ -30,7 +30,7 @@ services:
         icon: fad fa-pump-soap
       
       - title: "Mantención de hosting"
-        desc: "Te ayudamos con el mantenimiento de tu página web, la renovación de dominio y actualizaciones regulares de contenido."
+        desc: "Te ayudamos con la mantención de tu página web, la renovación de dominio y actualizaciones regulares de contenido."
         icon: far fa-browser
 
 about:
