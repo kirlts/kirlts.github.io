@@ -296,9 +296,11 @@ window.Efectos = Efectos;   // lo usa lluvia.js
 Efectos.aplicar();
 
 // ── modo catástrofe: el paso que se está leyendo queda marcado arriba ─────────
-(function pasos() {
+// La guía publicada en GitHub Pages llega cifrada y se inserta después de cargar: la vuelve a llamar.
+window.provisionPasos = function pasos() {
   const nav = document.querySelector('.pasos-nav');
-  if (!nav || !('IntersectionObserver' in window)) return;
+  if (!nav || nav.dataset.vigilado || !('IntersectionObserver' in window)) return;
+  nav.dataset.vigilado = '1';
   const enlaces = new Map([...nav.querySelectorAll('a[href^="#"]')].map((a) => [a.getAttribute('href').slice(1), a]));
   const io = new IntersectionObserver((entradas) => {
     entradas.forEach((en) => {
@@ -310,7 +312,8 @@ Efectos.aplicar();
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
   enlaces.forEach((_, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
-})();
+};
+window.provisionPasos();
 
 // ── descifrado: solo cuando algo cambia en vivo ───────────────────────────────
 // Un estado que llega por el canal de eventos, o el título cuando la página cambia sola (llegó el

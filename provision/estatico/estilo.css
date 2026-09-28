@@ -777,3 +777,10 @@ html.sin-efectos *, html.sin-efectos *::before, html.sin-efectos *::after { anim
 .pestanas > input:nth-of-type(5):checked ~ .pestana-panel:nth-of-type(5),
 .pestanas > input:nth-of-type(6):checked ~ .pestana-panel:nth-of-type(6) { display: block; }
 .pestanas > input:focus-visible ~ .pestanas-rotulos { outline: 1px dashed var(--acento); outline-offset: 2px; }
+
+/* La prueba de que un paso terminó, junto al botón del siguiente («**Listo si:**» en docs/EMERGENCIA.md). */
+.paso-listo { margin: 1.2rem 0 0; padding: .6rem .8rem; border-left: 3px solid var(--acento); background: var(--superficie-2); }
+.paso-listo-r { display: block; font-family: var(--rotulo); color: var(--acento); font-size: .85em; letter-spacing: .04em; }
+/* Vistas de la guía publicada en GitHub Pages (web/pages.py): una se ve, las otras esperan. */
+.vista[hidden] { display: none !important; }
+.barra[hidden] { display: none !important; }
