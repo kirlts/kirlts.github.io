@@ -784,5 +784,3 @@ html.sin-efectos *, html.sin-efectos *::before, html.sin-efectos *::after { anim
 /* Vistas de la guía publicada en GitHub Pages (web/pages.py): una se ve, las otras esperan. */
 .vista[hidden] { display: none !important; }
 .barra[hidden] { display: none !important; }
-/* «**Importante: …**» en docs/EMERGENCIA.md (guia.py): lo que no se puede saltar, a la vista. */
-.guia p.importante, p.importante { font-size: 1.15em; padding: .7rem .9rem; border: 1px solid var(--ambar); color: var(--ambar); background: var(--tinte-aviso); }
