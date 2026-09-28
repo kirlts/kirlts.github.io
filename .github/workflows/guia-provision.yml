@@ -1,0 +1,120 @@
+name: Guía de provision
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+# Reemplaza a .github/workflows/guia-pages.yml de kirlts/provision: ese flujo corría en un
+# repositorio PRIVADO y la cuota de Actions de repositorios privados de esta cuenta se agota
+# a mitad de cada mes (corridas con 0 pasos). Los repositorios públicos no gastan esa cuota,
+# así que la regeneración se mueve a este repositorio, que ya es público.
+#
+# La dirección se invierte: antes provision empujaba el resultado a este repositorio; ahora
+# este repositorio clona provision (de solo lectura, con PROVISION_DEPLOY_KEY, una deploy key
+# de esa cuenta que no puede escribir) y corre su web/pages.py. El clon vive en
+# $RUNNER_TEMP, fuera de lo que Pages publica, y se borra al terminar.
+#
+# El programa cifra la guía con age para una llave pública (web/pages.py): lo que termina en
+# provision/ nunca lleva texto legible, pero igual ningún paso de este flujo imprime su
+# contenido ni el de la llave privada (sin `set -x`, sin `cat` de la salida) porque los
+# registros de un repositorio público son públicos.
+#
+# El commit de provision no cambia solo porque pasó tiempo, pero la salida cifrada de
+# pages.py sí cambia en cada corrida (usa una sal nueva). Por eso el flujo compara el commit
+# de provision con el guardado en provision/.fuente y termina sin tocar nada si es el mismo:
+# un commit cada 30 minutos sin cambios reales ensuciaría el historial y dispararía Pages de
+# más.
+#
+# Un push hecho con el GITHUB_TOKEN de este mismo flujo no dispara otros flujos (evita bucles
+# infinitos), así que pages.yml no vería este commit. Este flujo despliega Pages él mismo al
+# final, con los mismos pasos que pages.yml (upload-pages-artifact / deploy-pages) y el mismo
+# grupo de concurrencia («pages»), para que los dos nunca corran a la vez sobre el mismo sitio.
+#
+# Versiones de acciones y decisiones, como en ~/clinicazk/.github/workflows/deploy.yml:
+# actions/checkout@v7 y actions/setup-python@v7 corren sobre Node 24, sin el aviso de retiro
+# de Node 20. webfactory/ssh-agent@v0.10.0 es la misma razón (su v0.9.x seguía en Node 20).
+# python-version 3.12 porque web/pages.py no declara ninguna otra.
+jobs:
+  regenerar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.PROVISION_DEPLOY_KEY }}
+
+      - name: Clonar provision y comparar con provision/.fuente
+        id: comparar
+        run: |
+          set -eu
+          mkdir -p ~/.ssh
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts 2>/dev/null
+
+          CLON="${RUNNER_TEMP}/provision"
+          git clone --quiet git@github.com:kirlts/provision.git "$CLON"
+
+          SHA=$(git -C "$CLON" rev-parse HEAD)
+          SHA_GUARDADO=$(cat provision/.fuente 2>/dev/null || echo "")
+
+          echo "clon=$CLON" >> "$GITHUB_OUTPUT"
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          if [ "$SHA" = "$SHA_GUARDADO" ]; then
+            echo "El commit de provision no cambió (${SHA})."
+            echo "cambio=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "cambio=si" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Instalar age
+        if: steps.comparar.outputs.cambio == 'si'
+        run: sudo apt-get install -y -qq age
+
+      - name: Regenerar provision/
+        if: steps.comparar.outputs.cambio == 'si'
+        run: |
+          set -eu
+          rm -rf provision
+          python3 "${{ steps.comparar.outputs.clon }}/web/pages.py" provision
+          echo "${{ steps.comparar.outputs.sha }}" > provision/.fuente
+
+      - name: Borrar el clon de provision
+        if: always()
+        run: rm -rf "${RUNNER_TEMP}/provision"
+
+      - name: Commit y push
+        if: steps.comparar.outputs.cambio == 'si'
+        run: |
+          set -eu
+          SHA_CORTO=$(echo "${{ steps.comparar.outputs.sha }}" | cut -c1-7)
+          git add provision
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "provision: guía desde ${SHA_CORTO}"
+          git push origin main
+
+      - uses: actions/upload-pages-artifact@v5
+        if: steps.comparar.outputs.cambio == 'si'
+        with:
+          path: .
+
+      - id: despliegue
+        if: steps.comparar.outputs.cambio == 'si'
+        uses: actions/deploy-pages@v5
