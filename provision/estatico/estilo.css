@@ -789,3 +789,16 @@ html.sin-efectos *, html.sin-efectos *::before, html.sin-efectos *::after { anim
 /* Solo desde 700 px: en el teléfono, con 35 caracteres por línea, la justificación abre huecos entre palabras
    (captura a 390 px del 2026-09-28). */
 @media (min-width: 700px) { .guia p, .relato p, .catastrofe p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; } }
+/* «Sitio completo ↗» en la guía de GitHub Pages: al pasar el mouse o enfocar, dice adónde lleva. En el menú
+   del teléfono, que no tiene mouse, la nota va siempre debajo del enlace. */
+#menu a.externo { position: relative; }
+.externo-nota { position: absolute; top: calc(100% + 8px); left: 0; z-index: 20; width: 22rem; max-width: 80vw;
+  padding: .55rem .7rem; font-family: var(--lectura); font-size: .85rem; line-height: 1.45; letter-spacing: 0; white-space: normal;
+  text-transform: none; color: var(--texto); background: var(--superficie-2); border: 1px solid var(--linea);
+  opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .15s ease, transform .15s ease; }
+#menu a.externo:hover .externo-nota, #menu a.externo:focus-visible .externo-nota { opacity: 1; transform: none; }
+@media (hover: none), (max-width: 699px) {
+  #menu a.externo { display: block; flex: 1 1 100%; }
+  .externo-nota { position: static; display: block; width: auto; max-width: none; margin-top: .3rem; padding: 0;
+    border: 0; background: none; opacity: 1; transform: none; color: var(--tenue); }
+}
