@@ -1,0 +1,85 @@
+/* acceso.css: la entrada con contraseña (/entrar) y lo propio de la puerta pública (web/acceso.py).
+ *
+ * La pantalla de entrada es lo primero que Martín ve desde un computador ajeno, y no carga JavaScript
+ * (acceso.py la arma sin app.js ni lluvia.js). Por eso la lluvia es un cuadro quieto de la misma lluvia
+ * (lluvia-quieta.webp, 1600×1000, 90 KB, sacado de lluvia.js con --lluvia-fondo 0,5) detrás de un panel
+ * opaco: el texto y el campo nunca quedan sobre los caracteres. El título de la página (h1.acceso-marca,
+ * «Provision») va sobre el borde del panel, como los demás paneles de la web.
+ * Usa los tokens de estilo.css. Diseño y decisiones: docs/DISENO-WEB.md.
+ */
+
+/* ── entrar ──────────────────────────────────────────────────────────────────── */
+html:has(body.pagina-acceso) { background: var(--fondo) url("lluvia-quieta.webp") center top / cover no-repeat; }
+/* El panel cabe en la primera vista en cualquier pantalla: sin desplazamiento. */
+body.pagina-acceso { background: transparent; min-height: 100vh; min-height: 100dvh; display: grid; align-content: center; padding: 1.5rem 0 8vh; }
+.pagina-acceso main.acceso {
+  position: relative; width: 100%; max-width: 32rem; margin: 0 auto; padding: 2rem 1.1rem 1.4rem;
+  background: var(--superficie); border: 1px solid var(--linea);
+}
+.acceso-marca {
+  position: absolute; top: 0; left: .75rem; transform: translateY(-50%); margin: 0; padding: 0 .4rem;
+  background: var(--superficie); font-family: var(--rotulo); font-weight: 600; font-size: 1.05rem; line-height: 1.25;
+  letter-spacing: .34em; text-transform: uppercase; color: var(--acento); text-shadow: var(--resplandor);
+  animation: none;
+}
+.acceso-marca::before, .acceso-marca::after { color: var(--linea); letter-spacing: 0; text-shadow: none; }
+.acceso-marca::before { content: "┤ "; }
+.acceso-marca::after { content: " ├"; }
+.acceso-que { margin: 0 0 1.4rem; color: var(--texto); font-size: 1.02rem; }
+.acceso-formulario { display: grid; gap: .5rem; }
+.acceso-campo { font-family: var(--rotulo); color: var(--texto-fuerte); }
+.acceso-clave {
+  width: 100%; min-height: 52px; padding: .6rem .8rem; font-family: var(--mono); font-size: 1.15rem; letter-spacing: .08em;
+  color: var(--texto-fuerte); background: var(--terminal); border: 1px solid var(--linea); border-radius: 0; caret-color: var(--acento);
+}
+.acceso-clave:focus { border-color: var(--acento); outline: 1px solid var(--acento); outline-offset: 0; }
+/* El error queda pegado al campo que lo causó, en rojo y con su signo. */
+.acceso-clave[aria-invalid="true"] { border-color: var(--rojo); }
+.acceso-error { margin: 0; color: var(--rojo); }
+.acceso-error::before { content: "✕ "; }
+.acceso-boton { width: 100%; min-height: 52px; margin-top: .5rem; font-size: 1.1rem; }
+@media (min-width: 721px) {
+  /* En pantallas anchas, el panel a la izquierda y la lluvia ocupando el resto. */
+  .pagina-acceso main.acceso { margin: 0 0 0 12vw; padding: 2.2rem 1.8rem 1.6rem; }
+}
+
+/* ── puerta pública: «Salir» en la cabecera ──────────────────────────────────
+   acceso.py lo pone después del menú. En el teléfono va dentro del menú plegado; en pantallas anchas, al
+   final de la fila del menú. */
+.barra .salir { grid-column: 1 / -1; justify-self: end; margin: 0; }
+html.js .barra:not(.menu-abierto) .salir { display: none; }
+/* «Salir» con el aspecto de las entradas del menú. */
+.barra .salir-boton { display: flex; align-items: center; min-height: var(--toque); padding: 0 .6rem; font-family: var(--rotulo); font-size: 1rem;
+               color: var(--tenue); text-decoration: none; }
+.barra .salir-boton:hover { color: var(--texto-fuerte); text-decoration: underline; text-decoration-color: var(--linea); }
+@media (min-width: 1180px) {
+  .barra .salir, html.js .barra:not(.menu-abierto) .salir { display: block; order: 1; }
+  .barra .salir-boton { padding: 0 .4rem; font-size: .95rem; }
+}
+/* Con «Acceso por internet» y «Salir», la cabecera pide 1150 px. Donde no caben, el menú baja a una
+   segunda fila: bajo 1440 px y en las páginas de lectura, que miden 1180 px. */
+@media (min-width: 1180px) and (max-width: 1439px) {
+  .barra:has(.salir) { flex-wrap: wrap; }
+  /* !important: las reglas del menú de html.js pesan más y ponen order: 1. */
+  .barra:has(.salir) nav { order: 5 !important; flex-basis: 100%; margin-left: -.4rem; }
+  .barra:has(.salir) .salir { order: 4 !important; }
+}
+@media (min-width: 1440px) {
+  :root:has(main > .guia) .barra:has(.salir), :root:has(main > .catastrofe) .barra:has(.salir) { flex-wrap: wrap; }
+  :root:has(main > .guia) .barra:has(.salir) nav, :root:has(main > .catastrofe) .barra:has(.salir) nav { order: 5 !important; flex-basis: 100%; margin-left: -.4rem; }
+  :root:has(main > .guia) .barra:has(.salir) .salir, :root:has(main > .catastrofe) .barra:has(.salir) .salir { order: 4 !important; }
+}
+
+/* ── Rescate, la portada de la puerta pública ────────────────────────────── */
+.rescate-bloque { margin-top: 2rem; }
+.rescate-bloque > p { max-width: 62ch; }
+.pasos-pendrive { padding-left: 1.3rem; display: grid; gap: .8rem; max-width: 70ch; }
+code.suma { word-break: break-all; overflow-wrap: anywhere; }
+.tailscale-vence.aviso { color: var(--ambar); }
+/* Una huella o una suma que no cabe empieza en su propia línea, así se compara de corrido. */
+.rescate-bloque p code, .rescate-bloque li code { display: inline-block; max-width: 100%; overflow-wrap: anywhere; }
+.rescate-bloque .cmd code { overflow-wrap: anywhere; }
+/* Con la cabecera en dos filas, el índice fijo de la guía y los pasos quedan bajo ella. */
+@media (min-width: 1100px) {
+  :root:has(.barra .salir) .guia > .indice, :root:has(.barra .salir) .catastrofe > .pasos-nav { top: 7.5rem; }
+}
