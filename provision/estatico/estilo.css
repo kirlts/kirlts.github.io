@@ -784,3 +784,8 @@ html.sin-efectos *, html.sin-efectos *::before, html.sin-efectos *::after { anim
 /* Vistas de la guía publicada en GitHub Pages (web/pages.py): una se ve, las otras esperan. */
 .vista[hidden] { display: none !important; }
 .barra[hidden] { display: none !important; }
+/* Párrafos de lectura justificados, con guiones en español (<html lang="es">): medido por el juez de texto el
+   2026-09-28, textAlign «start» y hyphens «manual» en el 100 % de los párrafos. Tablas, código y listas no. */
+/* Solo desde 700 px: en el teléfono, con 35 caracteres por línea, la justificación abre huecos entre palabras
+   (captura a 390 px del 2026-09-28). */
+@media (min-width: 700px) { .guia p, .relato p, .catastrofe p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; } }
