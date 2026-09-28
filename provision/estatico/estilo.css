@@ -725,6 +725,7 @@ html.sin-efectos *, html.sin-efectos *::before, html.sin-efectos *::after { anim
 @media (min-width: 1100px) {
   /* El ancho baja en :root para que la cabecera siga alineada con el panel. */
   :root:has(main > .guia), :root:has(main > .catastrofe) { --ancho: 1180px; }
+
   .guia:has(> .indice), .catastrofe {
     display: grid; grid-template-columns: minmax(0, 46rem) 17rem; justify-content: space-between; column-gap: 3rem; max-width: none;
   }
@@ -802,3 +803,6 @@ html.sin-efectos *, html.sin-efectos *::before, html.sin-efectos *::after { anim
   .externo-nota { position: static; display: block; width: auto; max-width: none; margin-top: .3rem; padding: 0;
     border: 0; background: none; opacity: 1; transform: none; color: var(--tenue); }
 }
+
+/* Desde 1440 px la guía y los pasos crecen con la pantalla: fijos en 1180 px dejaban 740 px vacíos a 1920. */
+@media (min-width: 1440px) { :root:has(main > .guia), :root:has(main > .catastrofe) { --ancho: 1320px; } }

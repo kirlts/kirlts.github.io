@@ -40,7 +40,7 @@ body.pagina-acceso { background: transparent; min-height: 100vh; min-height: 100
 .acceso-boton { width: 100%; min-height: 52px; margin-top: .5rem; font-size: 1.1rem; }
 @media (min-width: 721px) {
   /* En pantallas anchas, el panel a la izquierda y la lluvia ocupando el resto. */
-  .pagina-acceso main.acceso { margin: 0 0 0 12vw; padding: 2.2rem 1.8rem 1.6rem; }
+  .pagina-acceso main.acceso { margin: 0 0 0 min(12vw, 9rem); padding: 2.2rem 1.8rem 1.6rem; }
 }
 
 /* ── puerta pública: «Salir» en la cabecera ──────────────────────────────────
@@ -83,3 +83,6 @@ code.suma { word-break: break-all; overflow-wrap: anywhere; }
 @media (min-width: 1100px) {
   :root:has(.barra .salir) .guia > .indice, :root:has(.barra .salir) .catastrofe > .pasos-nav { top: 7.5rem; }
 }
+
+/* A 1920 px el panel usaba el 38,6 % del ancho (juez de espacio, 2026-09-28). */
+@media (min-width: 1440px) { .pagina-acceso main.acceso { max-width: 38rem; } }
